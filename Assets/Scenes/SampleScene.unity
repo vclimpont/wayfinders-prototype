@@ -164,7 +164,7 @@ Light:
   m_Type: 2
   m_Shape: 0
   m_Color: {r: 1, g: 0.8028672, b: 0.495283, a: 1}
-  m_Intensity: 5
+  m_Intensity: 10
   m_Range: 20
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -449,7 +449,8 @@ MonoBehaviour:
   lanternRenderer: {fileID: 1148103236}
   lanternMaterialOn: {fileID: 2100000, guid: 14ac0112afc7dd94c9b1dd8dd51e8674, type: 2}
   lanternMaterialOff: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  fadingSpeed: 0.005
+  maxIntensity: 10
+  fadingSpeed: 0.01
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0

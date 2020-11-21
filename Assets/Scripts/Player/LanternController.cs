@@ -8,14 +8,19 @@ public class LanternController : MonoBehaviour
     public MeshRenderer lanternRenderer;
     public Material lanternMaterialOn;
     public Material lanternMaterialOff;
+    public float maxIntensity;
     public float fadingSpeed;
 
     public bool Active { get; set; }
+
+    private Material currentMat;
 
     // Start is called before the first frame update
     void Start()
     {
         Active = true;
+        lanternLight.intensity = maxIntensity;
+        currentMat = lanternMaterialOn;
     }
 
     // Update is called once per frame
@@ -34,6 +39,8 @@ public class LanternController : MonoBehaviour
         if(lanternLight.isActiveAndEnabled && lanternLight.intensity > 0)
         {
             lanternLight.intensity -= fadingSpeed;
+            lanternRenderer.material.Lerp(lanternMaterialOn, lanternMaterialOff, (lanternLight.intensity - maxIntensity) / -maxIntensity);
+            currentMat = lanternRenderer.material;
         }
     }
 
@@ -41,6 +48,6 @@ public class LanternController : MonoBehaviour
     {
         Active = !Active;
         lanternLight.enabled = Active;
-        lanternRenderer.material = Active ? lanternMaterialOn : lanternMaterialOff;
+        lanternRenderer.material = Active ? currentMat : lanternMaterialOff;
     }
 }
