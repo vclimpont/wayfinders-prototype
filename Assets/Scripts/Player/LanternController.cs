@@ -53,4 +53,12 @@ public class LanternController : MonoBehaviour
     {
         lanternLight.intensity = maxIntensity;
     }
+
+    public void ChangeLightProperties(int lanternProperty, Color lightColor, Material lanternMaterial)
+    {
+        CurrentLanternProperty = lanternProperty;
+        lanternLight.color = lightColor;
+        LanternMaterialOn = new Material(lanternMaterial);
+        currentMatFading = LanternMaterialOn;
+    }
 }

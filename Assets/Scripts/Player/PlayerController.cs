@@ -41,11 +41,15 @@ public class PlayerController : MonoBehaviour
         rb.velocity = new Vector3(xMovement * speed, rb.velocity.y, zMovement * speed);
     }
 
+    public void ChangeLanternProperty(int sourceProperty, Color lightColor, Material sourceMaterial)
+    {
+        lantern.ChangeLightProperties(sourceProperty, lightColor, sourceMaterial);
+    }
+
     private void OnTriggerStay(Collider other)
     {
         if(other.CompareTag("Campfire"))
         {
-            Debug.Log("reload");
             lantern.ReloadLantern();
         }
     }
