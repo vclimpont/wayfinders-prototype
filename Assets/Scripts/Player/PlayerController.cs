@@ -40,4 +40,13 @@ public class PlayerController : MonoBehaviour
     {
         rb.velocity = new Vector3(xMovement * speed, rb.velocity.y, zMovement * speed);
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if(other.CompareTag("Campfire"))
+        {
+            Debug.Log("reload");
+            lantern.ReloadLantern();
+        }
+    }
 }

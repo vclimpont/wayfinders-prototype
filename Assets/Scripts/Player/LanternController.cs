@@ -37,7 +37,6 @@ public class LanternController : MonoBehaviour
         if(lanternLight.isActiveAndEnabled && lanternLight.intensity > 0)
         {
             lanternLight.intensity -= fadingSpeed;
-            Debug.Log((lanternLight.intensity - maxIntensity) / -maxIntensity);
             lanternRenderer.material.Lerp(LanternMaterialOn, lanternMaterialOff, (lanternLight.intensity - maxIntensity) / -maxIntensity);
             currentMatFading = lanternRenderer.material;
         }
@@ -48,5 +47,10 @@ public class LanternController : MonoBehaviour
         Active = !Active;
         lanternLight.enabled = Active;
         lanternRenderer.material = Active ? currentMatFading : lanternMaterialOff;
+    }
+
+    public void ReloadLantern()
+    {
+        lanternLight.intensity = maxIntensity;
     }
 }
