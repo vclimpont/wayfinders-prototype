@@ -43,14 +43,16 @@ public class PlayerController : MonoBehaviour
 
     public void ChangeLanternProperty(int sourceProperty, Color lightColor, Material sourceMaterial)
     {
-        lantern.ChangeLightProperties(sourceProperty, lightColor, sourceMaterial);
+        lantern.UpdateLanternProperty(sourceProperty);
+        lantern.ChangeLightProperties(lightColor, sourceMaterial);
+        lantern.ReloadLantern(0.2f);
     }
 
     private void OnTriggerStay(Collider other)
     {
         if(other.CompareTag("Campfire"))
         {
-            lantern.ReloadLantern();
+            lantern.ReloadLantern(1);
         }
     }
 }

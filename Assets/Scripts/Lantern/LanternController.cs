@@ -10,7 +10,8 @@ public class LanternController : MonoBehaviour
     public Material lanternMaterialOff;
 
     public Material LanternMaterialOn { get; set; }
-    public int CurrentLanternProperty { get; set; }
+    public int CurrentLanternPropertyID { get; set; }
+    public LanternProperty LanternProperty { get; set; }
     public bool Active { get; set; }
 
     private MeshRenderer lanternRenderer;
@@ -25,6 +26,9 @@ public class LanternController : MonoBehaviour
 
         lanternLight.intensity = maxIntensity;
         currentMatFading = LanternMaterialOn;
+
+        LanternProperty = gameObject.AddComponent<OrangeLantern>();
+        CurrentLanternPropertyID = 1;
     }
 
     private void FixedUpdate()
@@ -49,14 +53,34 @@ public class LanternController : MonoBehaviour
         lanternRenderer.material = Active ? currentMatFading : lanternMaterialOff;
     }
 
-    public void ReloadLantern()
+    public void ReloadLantern(float ratio)
     {
-        lanternLight.intensity = maxIntensity;
+        lanternLight.intensity = Mathf.Min(maxIntensity, lanternLight.intensity + ratio * maxIntensity);
     }
 
-    public void ChangeLightProperties(int lanternProperty, Color lightColor, Material lanternMaterial)
+    public void UpdateLanternProperty(int lanternProperty)
     {
-        CurrentLanternProperty = lanternProperty;
+        Destroy(LanternProperty);
+        CurrentLanternPropertyID = lanternProperty;
+
+        switch (lanternProperty)
+        {
+            case 1:
+                LanternProperty = gameObject.AddComponent<OrangeLantern>();
+                break;
+            case 2:
+                LanternProperty = gameObject.AddComponent<GreenLantern>();
+                break;
+            case 3:
+                LanternProperty = gameObject.AddComponent<RedLantern>();
+                break;
+            default:
+                break;
+        }
+    }
+
+    public void ChangeLightProperties(Color lightColor, Material lanternMaterial)
+    {
         lanternLight.color = lightColor;
         LanternMaterialOn = new Material(lanternMaterial);
         currentMatFading = LanternMaterialOn;
