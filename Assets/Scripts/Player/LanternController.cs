@@ -5,28 +5,26 @@ using UnityEngine;
 public class LanternController : MonoBehaviour
 {
     public Light lanternLight;
-    public MeshRenderer lanternRenderer;
-    public Material lanternMaterialOn;
-    public Material lanternMaterialOff;
     public float maxIntensity;
     public float fadingSpeed;
+    public Material lanternMaterialOff;
 
+    public Material LanternMaterialOn { get; set; }
+    public int CurrentLanternProperty { get; set; }
     public bool Active { get; set; }
 
-    private Material currentMat;
+    private MeshRenderer lanternRenderer;
+    private Material currentMatFading;
 
     // Start is called before the first frame update
     void Start()
     {
         Active = true;
+        lanternRenderer = GetComponent<MeshRenderer>();
+        LanternMaterialOn = new Material(lanternRenderer.material);
+
         lanternLight.intensity = maxIntensity;
-        currentMat = lanternMaterialOn;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
+        currentMatFading = LanternMaterialOn;
     }
 
     private void FixedUpdate()
@@ -39,8 +37,9 @@ public class LanternController : MonoBehaviour
         if(lanternLight.isActiveAndEnabled && lanternLight.intensity > 0)
         {
             lanternLight.intensity -= fadingSpeed;
-            lanternRenderer.material.Lerp(lanternMaterialOn, lanternMaterialOff, (lanternLight.intensity - maxIntensity) / -maxIntensity);
-            currentMat = lanternRenderer.material;
+            Debug.Log((lanternLight.intensity - maxIntensity) / -maxIntensity);
+            lanternRenderer.material.Lerp(LanternMaterialOn, lanternMaterialOff, (lanternLight.intensity - maxIntensity) / -maxIntensity);
+            currentMatFading = lanternRenderer.material;
         }
     }
 
@@ -48,6 +47,6 @@ public class LanternController : MonoBehaviour
     {
         Active = !Active;
         lanternLight.enabled = Active;
-        lanternRenderer.material = Active ? currentMat : lanternMaterialOff;
+        lanternRenderer.material = Active ? currentMatFading : lanternMaterialOff;
     }
 }

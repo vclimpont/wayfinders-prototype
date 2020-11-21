@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public LanternController lantern;
     public float speed;
 
     private Rigidbody rb;
-    private LanternController lantern;
 
     private float xMovement;
     private float zMovement;
@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        lantern = GetComponent<LanternController>();
     }
 
     // Update is called once per frame

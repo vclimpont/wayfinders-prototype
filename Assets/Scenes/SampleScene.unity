@@ -319,7 +319,6 @@ GameObject:
   - component: {fileID: 848092229}
   - component: {fileID: 848092233}
   - component: {fileID: 848092234}
-  - component: {fileID: 848092235}
   m_Layer: 8
   m_Name: Player
   m_TagString: Untagged
@@ -432,25 +431,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19f3585672fd35746841688c0891713d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lantern: {fileID: 1148103238}
   speed: 10
---- !u!114 &848092235
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 848092228}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8c8ea948d8a0904da43eb453d573443, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  lanternLight: {fileID: 504461943}
-  lanternRenderer: {fileID: 1148103236}
-  lanternMaterialOn: {fileID: 2100000, guid: 14ac0112afc7dd94c9b1dd8dd51e8674, type: 2}
-  lanternMaterialOff: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
-  maxIntensity: 10
-  fadingSpeed: 0.01
 --- !u!1 &963194225
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,6 +528,7 @@ GameObject:
   - component: {fileID: 1148103237}
   - component: {fileID: 1148103236}
   - component: {fileID: 1148103235}
+  - component: {fileID: 1148103238}
   m_Layer: 0
   m_Name: Lantern
   m_TagString: Untagged
@@ -627,6 +610,23 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1148103233}
   m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1148103238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1148103233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8c8ea948d8a0904da43eb453d573443, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lanternLight: {fileID: 504461943}
+  maxIntensity: 10
+  fadingSpeed: 0.01
+  lanternMaterialOff: {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  LanternMaterialOn: {fileID: 2100000, guid: 14ac0112afc7dd94c9b1dd8dd51e8674, type: 2}
 --- !u!1 &1896388217
 GameObject:
   m_ObjectHideFlags: 0
