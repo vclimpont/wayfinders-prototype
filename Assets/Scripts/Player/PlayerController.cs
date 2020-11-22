@@ -27,11 +27,13 @@ public class PlayerController : MonoBehaviour
         xMovement = Input.GetAxisRaw("Horizontal");
         zMovement = Input.GetAxisRaw("Vertical");
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0))
         {
-            RaycastHit hitInfo = RayCastOnMousePosition();
-            Instantiate(cast, hitInfo.point, Quaternion.identity);
-            //lantern.UseLanternProperty(RayCastOnMousePosition());
+            lantern.UseLanternProperty(RayCastOnMousePosition());
+        }
+        if(Input.GetMouseButtonUp(0))
+        {
+            lantern.StopLanternProperty();
         }
 
         if (Input.GetMouseButtonDown(1))

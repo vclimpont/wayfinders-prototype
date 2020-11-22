@@ -58,13 +58,22 @@ public class LanternController : MonoBehaviour
         lanternLight.intensity = Mathf.Min(maxIntensity, lanternLight.intensity + ratio * maxIntensity);
     }
 
-    public void UseLanternProperty(Vector3 mousePosition)
+    public void UseLanternProperty(RaycastHit hitInfo)
     {
-        LanternProperty.UsePropertyAction(mousePosition);
+        if(lanternLight.intensity > 0 && Active)
+        {
+            LanternProperty.UsePropertyAction(hitInfo);
+        }
+    }
+
+    public void StopLanternProperty()
+    {
+        LanternProperty.StopPropertyAction();
     }
 
     public void UpdateLanternProperty(int lanternProperty)
     {
+        StopLanternProperty();
         Destroy(LanternProperty);
         CurrentLanternPropertyID = lanternProperty;
 

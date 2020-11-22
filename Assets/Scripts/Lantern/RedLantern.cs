@@ -4,28 +4,83 @@ using UnityEngine;
 
 public class RedLantern : LanternProperty
 {
+    private LineRenderer line;
 
-    public override void UsePropertyAction(Vector3 mousePosition)
+    public override void UsePropertyAction(RaycastHit hitInfo)
     {
-        Debug.Log("KABOOM");
-        CastLaser(transform.position, mousePosition);
+        if(hitInfo.transform == null)
+        {
+            return;
+        }
+
+        List<Vector3> hitPoints = CastLaser(transform.position, Vector3.Normalize(hitInfo.point - transform.position));
+        DrawLaser(hitPoints);
     }
 
-    private void CastLaser(Vector3 lanternPosition, Vector3 targetPosition)
+    public override void StopPropertyAction()
     {
-        LineRenderer line = gameObject.AddComponent<LineRenderer>();
-        line.positionCount = 2;
-        line.SetPosition(0, lanternPosition);
-        line.SetPosition(1, targetPosition);
-
-        StopAllCoroutines();
-        StartCoroutine(DestroyLine(line));
+        if(line != null)
+        {
+            Destroy(line);
+        }
     }
 
-    IEnumerator DestroyLine(LineRenderer line)
+    private List<Vector3> CastLaser(Vector3 basePosition, Vector3 baseDirection)
     {
-        yield return new WaitForSeconds(2f);
+        List<Vector3> hitPoints = new List<Vector3>();
+        hitPoints.Add(transform.position);
 
-        Destroy(line);
+        Vector3 position = basePosition;
+        Vector3 direction = baseDirection;
+        bool hitMirror = true;
+
+        while(hitMirror)
+        {
+            RaycastHit hit;
+            Physics.Raycast(position, direction, out hit);
+
+            if (hit.transform == null)
+            {
+                return hitPoints;
+            }
+
+            hitPoints.Add(hit.point);
+
+            if (hit.transform.CompareTag("Mirror"))
+            {
+                position = hit.point;
+                direction = GetReflectDirection(direction, hit.normal);
+            }
+            else
+            {
+                hitMirror = false;
+            }
+        }
+
+        return hitPoints;
+    }
+
+    private Vector3 GetReflectDirection(Vector3 direction, Vector3 normal)
+    {
+        return (normal * Vector3.Dot(direction * -1f, normal) * 2f) + direction;
+    }
+
+    private void DrawLaser(List<Vector3> hitPoints)
+    {
+        if (hitPoints.Count < 2)
+        {
+            return;
+        }
+
+        if(line == null)
+        {
+            line = gameObject.AddComponent<LineRenderer>();
+            line.startColor = Color.red;
+            line.endColor = Color.red;
+            line.startWidth = 0.1f;
+            line.endWidth = 0.1f;
+        }
+        line.positionCount = hitPoints.Count;
+        line.SetPositions(hitPoints.ToArray());
     }
 }

@@ -4,7 +4,12 @@ using UnityEngine;
 
 public class OrangeLantern : LanternProperty
 {
-    public override void UsePropertyAction(Vector3 mousePosition)
+    public override void UsePropertyAction(RaycastHit hitInfo)
+    {
+
+    }
+
+    public override void StopPropertyAction()
     {
 
     }
