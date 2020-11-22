@@ -58,6 +58,11 @@ public class LanternController : MonoBehaviour
         lanternLight.intensity = Mathf.Min(maxIntensity, lanternLight.intensity + ratio * maxIntensity);
     }
 
+    public void UseLanternProperty(Vector3 mousePosition)
+    {
+        LanternProperty.UsePropertyAction(mousePosition);
+    }
+
     public void UpdateLanternProperty(int lanternProperty)
     {
         Destroy(LanternProperty);

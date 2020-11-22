@@ -4,14 +4,8 @@ using UnityEngine;
 
 public class OrangeLantern : LanternProperty
 {
-    // Update is called once per frame
-    void Update()
+    public override void UsePropertyAction(Vector3 mousePosition)
     {
-        UsePropertyAction();
-    }
 
-    protected override void UsePropertyAction()
-    {
-        Debug.Log("ORANGE LANTERN");
     }
 }

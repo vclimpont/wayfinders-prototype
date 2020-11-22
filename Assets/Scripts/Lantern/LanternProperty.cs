@@ -4,5 +4,5 @@ using UnityEngine;
 
 public abstract class LanternProperty : MonoBehaviour
 {
-    protected abstract void UsePropertyAction();
+    public abstract void UsePropertyAction(Vector3 mousePosition);
 }

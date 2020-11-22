@@ -726,6 +726,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19f3585672fd35746841688c0891713d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  cast: {fileID: 0}
+  mainCamera: {fileID: 963194227}
   lantern: {fileID: 1148103238}
   speed: 10
 --- !u!1 &963194225

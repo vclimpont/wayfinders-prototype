@@ -4,14 +4,28 @@ using UnityEngine;
 
 public class RedLantern : LanternProperty
 {
-    // Update is called once per frame
-    void Update()
+
+    public override void UsePropertyAction(Vector3 mousePosition)
     {
-        UsePropertyAction();
+        Debug.Log("KABOOM");
+        CastLaser(transform.position, mousePosition);
     }
 
-    protected override void UsePropertyAction()
+    private void CastLaser(Vector3 lanternPosition, Vector3 targetPosition)
     {
-        Debug.Log("RED LANTERN");
+        LineRenderer line = gameObject.AddComponent<LineRenderer>();
+        line.positionCount = 2;
+        line.SetPosition(0, lanternPosition);
+        line.SetPosition(1, targetPosition);
+
+        StopAllCoroutines();
+        StartCoroutine(DestroyLine(line));
+    }
+
+    IEnumerator DestroyLine(LineRenderer line)
+    {
+        yield return new WaitForSeconds(2f);
+
+        Destroy(line);
     }
 }
