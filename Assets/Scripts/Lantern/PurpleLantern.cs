@@ -38,18 +38,18 @@ public class PurpleLantern : LanternProperty
         if(pointObject == null)
         {
             pointObject = new GameObject();
-            pointObject.transform.position = hitInfo.point;
-            if(pointLight == null)
-            {
-                SetLight();
-            }
         }
-        SetLight();
+        pointObject.transform.position = hitInfo.point + (hitInfo.normal * 2f);
+        if (pointLight == null)
+        {
+            SetLight();
+        }
     }
 
     public override void StopPropertyAction()
     {
-
+        Destroy(pointObject);
+        hitColliders = null;
     }
 
     public void SetProperties(Color col, float rad)
@@ -64,6 +64,8 @@ public class PurpleLantern : LanternProperty
         pointLight.type = LightType.Point;
         pointLight.color = lightColor;
         pointLight.intensity = 5;
-        pointLight.range = detectRadius;
+        pointLight.range = detectRadius * 3f;
+        pointLight.renderMode = LightRenderMode.ForcePixel;
+        pointLight.bounceIntensity = 0;
     }
 }

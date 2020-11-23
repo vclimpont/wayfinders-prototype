@@ -10,8 +10,9 @@ public class LanternController : MonoBehaviour
     public Material greenMaterial;
     public float chargeValue;
     [Header("Purple lantern")]
-    public Material purpleMaterial;
-
+    public Color purpleColor;
+    public float detectRadius;
+    [Header("Lantern Controller")]
     public Light lanternLight;
     public float maxIntensity;
     public float fadingSpeed;
@@ -101,6 +102,10 @@ public class LanternController : MonoBehaviour
             case 3:
                 LanternProperty = gameObject.AddComponent<RedLantern>();
                 ((RedLantern)LanternProperty).SetProperties(redMaterial);
+                break;
+            case 4:
+                LanternProperty = gameObject.AddComponent<PurpleLantern>();
+                ((PurpleLantern)LanternProperty).SetProperties(purpleColor, detectRadius);
                 break;
             default:
                 break;
