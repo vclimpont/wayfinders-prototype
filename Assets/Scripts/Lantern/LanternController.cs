@@ -72,6 +72,10 @@ public class LanternController : MonoBehaviour
         {
             LanternProperty.UsePropertyAction(hitInfo);
         }
+        else
+        {
+            LanternProperty.StopPropertyAction();
+        }
     }
 
     public void StopLanternProperty()
