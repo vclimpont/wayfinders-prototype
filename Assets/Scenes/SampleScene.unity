@@ -1105,6 +1105,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8c8ea948d8a0904da43eb453d573443, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  redMaterial: {fileID: 2100000, guid: a6f63dc4fedf2eb4590cd69e58e3faa0, type: 2}
+  greenMaterial: {fileID: 2100000, guid: ed80002dfb404f44ca15589209e72a7c, type: 2}
+  chargeValue: 0.02
+  purpleMaterial: {fileID: 0}
   lanternLight: {fileID: 504461943}
   maxIntensity: 10
   fadingSpeed: 0

@@ -5,6 +5,7 @@ using UnityEngine;
 public class RedLantern : LanternProperty
 {
     private LineRenderer line;
+    private Material lineMaterial;
 
     public override void UsePropertyAction(RaycastHit hitInfo)
     {
@@ -25,6 +26,11 @@ public class RedLantern : LanternProperty
         }
     }
 
+    public void SetProperties(Material mat)
+    {
+        lineMaterial = mat;
+    }
+
     private List<Vector3> CastLaser(Vector3 basePosition, Vector3 baseDirection)
     {
         List<Vector3> hitPoints = new List<Vector3>();
@@ -33,8 +39,9 @@ public class RedLantern : LanternProperty
         Vector3 position = basePosition;
         Vector3 direction = baseDirection;
         bool hitMirror = true;
+        int bounces = 0;
 
-        while(hitMirror)
+        while(hitMirror && bounces < 10)
         {
             RaycastHit hit;
             Physics.Raycast(position, direction, out hit);
@@ -50,6 +57,7 @@ public class RedLantern : LanternProperty
             {
                 position = hit.point;
                 direction = GetReflectDirection(direction, hit.normal);
+                bounces++;
             }
             else
             {
@@ -75,8 +83,7 @@ public class RedLantern : LanternProperty
         if(line == null)
         {
             line = gameObject.AddComponent<LineRenderer>();
-            line.startColor = Color.red;
-            line.endColor = Color.red;
+            line.material = lineMaterial;
             line.startWidth = 0.1f;
             line.endWidth = 0.1f;
         }

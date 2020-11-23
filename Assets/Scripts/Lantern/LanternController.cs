@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class LanternController : MonoBehaviour
 {
+    [Header("Red lantern")]
+    public Material redMaterial;
+    [Header("Green lantern")]
+    public Material greenMaterial;
+    public float chargeValue;
+    [Header("Purple lantern")]
+    public Material purpleMaterial;
+
     public Light lanternLight;
     public float maxIntensity;
     public float fadingSpeed;
@@ -84,9 +92,11 @@ public class LanternController : MonoBehaviour
                 break;
             case 2:
                 LanternProperty = gameObject.AddComponent<GreenLantern>();
+                ((GreenLantern)LanternProperty).SetProperties(greenMaterial, chargeValue);
                 break;
             case 3:
                 LanternProperty = gameObject.AddComponent<RedLantern>();
+                ((RedLantern)LanternProperty).SetProperties(redMaterial);
                 break;
             default:
                 break;
