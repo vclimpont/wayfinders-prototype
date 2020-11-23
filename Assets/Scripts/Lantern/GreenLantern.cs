@@ -8,9 +8,29 @@ public class GreenLantern : LanternProperty
     private Material lineMaterial;
     private float chargeValue;
 
+    private Transform hitTransform;
+
+    private void FixedUpdate()
+    {
+        if(hitTransform != null)
+        {
+            MonoBehaviour hitMB = hitTransform.GetComponent<MonoBehaviour>();
+            if (hitMB is IBreakable hitBreakable)
+            {
+                hitBreakable.Damage(chargeValue);
+            }
+            else if(hitMB is ILoadable hitLoadable)
+            {
+                hitLoadable.Load(chargeValue);
+            }
+        }
+    }
+
     public override void UsePropertyAction(RaycastHit hitInfo)
     {
-        if (hitInfo.transform == null)
+        hitTransform = hitInfo.transform;
+
+        if (hitTransform == null)
         {
             return;
         }
@@ -21,6 +41,7 @@ public class GreenLantern : LanternProperty
 
     public override void StopPropertyAction()
     {
+        hitTransform = null;
         if (line != null)
         {
             Destroy(line);
